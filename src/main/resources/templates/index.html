@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Переводчик</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="header">
+    <a href="/static">Главная</a>
+    <a href="/languages">Языки</a>
+    <a href="/training">Обучение</a>
+    <a href="/translate">Перевод</a>
+</div>
+
+<div class="container">
+    <h1>Low Resource Translator</h1>
+
+    <p>
+        Это веб-интерфейс для приложения перевода.
+        Здесь можно добавлять языки, обучающие примеры и выполнять перевод текста.
+    </p>
+
+    <div class="card-grid">
+        <div class="card">
+            <h2>Языки</h2>
+            <p>Добавление и просмотр языков перевода.</p>
+            <a href="/languages">Открыть</a>
+        </div>
+
+        <div class="card">
+            <h2>Обучение</h2>
+            <p>Добавление пар предложений для обучения переводчика.</p>
+            <a href="/training">Открыть</a>
+        </div>
+
+        <div class="card">
+            <h2>Перевод</h2>
+            <p>Перевод текста между добавленными языками.</p>
+            <a href="/translate">Открыть</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

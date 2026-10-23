@@ -1,0 +1,31 @@
+server:
+  port: 8000
+
+spring:
+  application:
+    name: low-resource-translator
+
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/translator_db}
+    username: ${SPRING_DATASOURCE_USERNAME:translator_user}
+    password: ${SPRING_DATASOURCE_PASSWORD:translator_password}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+app:
+  ollama:
+    base-url: ${APP_OLLAMA_BASE_URL:http://localhost:11434}
+    model: ${APP_OLLAMA_MODEL:mistral}
+  chroma:
+    base-url: ${APP_CHROMA_BASE_URL:http://localhost:8001}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Обучение</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="header">
+    <a href="/">Главная</a>
+    <a href="/languages">Языки</a>
+    <a href="/training">Обучение</a>
+    <a href="/translate">Перевод</a>
+</div>
+
+<div class="container">
+    <h1>Обучающие примеры</h1>
+
+    <div th:if="${message}" class="success" th:text="${message}"></div>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <h2>Добавить пример</h2>
+
+    <form method="post" action="/training">
+        <label>Исходный язык</label>
+        <input type="text" name="sourceLanguageCode" placeholder="Например: en" required>
+
+        <label>Целевой язык</label>
+        <input type="text" name="targetLanguageCode" placeholder="Например: ru" required>
+
+        <label>Исходный текст</label>
+        <textarea name="sourceText" placeholder="Hello, how are you?" required></textarea>
+
+        <label>Перевод</label>
+        <textarea name="targetText" placeholder="Привет, как дела?" required></textarea>
+
+        <label>Домен</label>
+        <input type="text" name="domain" placeholder="common" value="common">
+
+        <button type="submit">Добавить пример</button>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Языки</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<div class="header">
+    <a href="/">Главная</a>
+    <a href="/languages">Языки</a>
+    <a href="/training">Обучение</a>
+    <a href="/translate">Перевод</a>
+</div>
+
+<div class="container">
+    <h1>Языки</h1>
+
+    <div th:if="${message}" class="success" th:text="${message}"></div>
+    <div th:if="${error}" class="error" th:text="${error}"></div>
+
+    <h2>Добавить язык</h2>
+
+    <form method="post" action="/languages">
+        <label>Код языка</label>
+        <input type="text" name="code" placeholder="Например: en" required>
+
+        <label>Название языка</label>
+        <input type="text" name="name" placeholder="Например: English" required>
+
+        <button type="submit">Добавить язык</button>
+    </form>
+
+    <h2>Список языков</h2>
+
+    <table>
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Код</th>
+            <th>Название</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="language : ${languages}">
+            <td th:text="${language.id}"></td>
+            <td th:text="${language.code}"></td>
+            <td th:text="${language.name}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

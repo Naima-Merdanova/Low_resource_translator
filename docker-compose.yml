@@ -1,0 +1,52 @@
+services:
+  postgres:
+    image: postgres:16
+    container_name: translator-postgres
+    environment:
+      POSTGRES_DB: translator_db
+      POSTGRES_USER: translator_user
+      POSTGRES_PASSWORD: translator_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: translator-ollama
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+
+  chromadb:
+    image: chromadb/chroma:latest
+    container_name: translator-chromadb
+    ports:
+      - "8001:8000"
+    volumes:
+      - chroma_data:/chroma/chroma
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: translator-app
+    depends_on:
+      - postgres
+      - ollama
+      - chromadb
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/translator_db
+      SPRING_DATASOURCE_USERNAME: translator_user
+      SPRING_DATASOURCE_PASSWORD: translator_password
+      APP_OLLAMA_BASE_URL: http://ollama:11434
+      APP_OLLAMA_MODEL: mistral
+      APP_CHROMA_BASE_URL: http://chromadb:8000
+    ports:
+      - "8000:8000"
+
+volumes:
+  postgres_data:
+  ollama_data:
+  chroma_data:
